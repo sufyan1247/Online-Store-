@@ -1,0 +1,118 @@
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎<meta charset="UTF-8">
+‎<meta name="viewport" content="width=device-width, initial-scale=1.0">
+‎<title>My Marketplace</title>
+‎<style>
+‎  * { margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif; }
+‎  body { background: #f0f2f5 url('https://images.unsplash.com/photo-1581091215362-0bb07a20b6b6?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed; background-size: cover; }
+‎
+‎  header { background: rgba(0,0,0,0.7); color:#fff; padding:20px; text-align:center; }
+‎  header h1 { font-size:2em; }
+‎  nav { background: rgba(255,111,0,0.8); display:flex; justify-content:center; padding:10px; }
+‎  nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
+‎  nav a:hover { text-decoration:underline; }
+‎  .search-bar { max-width:600px; margin:20px auto; display:flex; }
+‎  .search-bar input { flex:1; padding:10px; border-radius:5px 0 0 5px; border:1px solid #ccc; }
+‎  .search-bar button { padding:10px; background:#ff6f00; color:#fff; border:none; border-radius:0 5px 5px 0; cursor:pointer; }
+‎  .search-bar button:hover { background:#e65c00; }
+‎
+‎  .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1200px; margin:20px auto; }
+‎  .product-card { background:#fff; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.2); overflow:hidden; transition: transform 0.3s; }
+‎  .product-card:hover { transform:translateY(-5px); }
+‎  .product-card img { width:100%; height:180px; object-fit:cover; }
+‎  .product-info { padding:15px; }
+‎  .product-info h3 { font-size:1.3em; margin-bottom:5px; }
+‎  .product-info p { margin-bottom:5px; color:#555; }
+‎  .product-info .payment { background:#fffbf0; padding:8px; border-radius:5px; border:1px solid #ffd580; margin:5px 0; }
+‎  .product-info button { padding:10px 15px; background:#ff6f00; color:#fff; border:none; border-radius:5px; cursor:pointer; margin-top:5px; }
+‎  .product-info button:hover { background:#e65c00; }
+‎
+‎  footer { background: rgba(0,0,0,0.7); color:#fff; text-align:center; padding:15px; margin-top:40px; }
+‎</style>
+‎</head>
+‎<body>
+‎
+‎<header>
+‎  <h1>My Marketplace</h1>
+‎</header>
+‎
+‎<nav>
+‎  <a href="#products">Products</a>
+‎  <a href="#contact">Contact</a>
+‎</nav>
+‎
+‎<div class="search-bar">
+‎  <input type="text" placeholder="Search products...">
+‎  <button>Search</button>
+‎</div>
+‎
+‎<main>
+‎  <section id="products">
+‎    <div class="products" id="product-list"></div>
+‎  </section>
+‎
+‎  <section id="contact" style="max-width:600px;margin:40px auto;">
+‎    <h2>Contact Us</h2>
+‎    <form action="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/formResponse" method="POST" target="_blank" style="display:flex;flex-direction:column;gap:10px;">
+‎      <input type="text" name="entry.1234567890" placeholder="Full Name" required>
+‎      <input type="email" name="entry.0987654321" placeholder="Email Address" required>
+‎      <textarea name="entry.1122334455" placeholder="Message" rows="5" required></textarea>
+‎      <button type="submit">Send Message</button>
+‎    </form>
+‎  </section>
+‎</main>
+‎
+‎<footer>
+‎  &copy; 2026 My Marketplace. All Rights Reserved.
+‎</footer>
+‎
+‎<script>
+‎const products = [
+‎  {
+‎    name:'iPhone 14',
+‎    price:'$700',
+‎    location:'Karachi',
+‎    img:'https://via.placeholder.com/300x180',
+‎    payment:'Payment Method: Easypaisa<br>03457310688<br>Owner: Hashmat Ali<br>Pay Delivery Charges First<br>Delivery Charges: Rs.250'
+‎  },
+‎  {
+‎    name:'Laptop Dell',
+‎    price:'$550',
+‎    location:'Lahore',
+‎    img:'https://via.placeholder.com/300x180',
+‎    payment:'Payment Method: Easypaisa<br>03457310688<br>Owner: Hashmat Ali<br>Pay Delivery Charges First<br>Delivery Charges: Rs.250'
+‎  },
+‎  {
+‎    name:'Sofa Set',
+‎    price:'$300',
+‎    location:'Islamabad',
+‎    img:'https://via.placeholder.com/300x180',
+‎    payment:'Payment Method: Easypaisa<br>03457310688<br>Owner: Hashmat Ali<br>Pay Delivery Charges First<br>Delivery Charges: Rs.250'
+‎  }
+‎];
+‎
+‎const formLink = "https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?usp=pp_url&entry.111=";
+‎const productList = document.getElementById('product-list');
+‎
+‎products.forEach(p=>{
+‎  const card = document.createElement('div');
+‎  card.className='product-card';
+‎  card.innerHTML=`
+‎    <img src="${p.img}" alt="${p.name}">
+‎    <div class="product-info">
+‎      <h3>${p.name}</h3>
+‎      <p>Price: ${p.price}</p>
+‎      <p>Location: ${p.location}</p>
+‎      <div class="payment">${p.payment}</div>
+‎      <button onclick="window.open('${formLink + encodeURIComponent(p.name)}','_blank')">Contact / Buy Now</button>
+‎    </div>
+‎  `;
+‎  productList.appendChild(card);
+‎});
+‎</script>
+‎
+‎</body>
+‎</html>
+‎
